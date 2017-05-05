@@ -735,43 +735,43 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 18 "scanner.l"
-{printf("%d\n", IDENTIFIER);if(error_flag == 0) return IDENTIFIER;}
+{return IDENTIFIER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 19 "scanner.l"
-{printf("%d\n", OP);if(error_flag == 0) return OP;}
+{return OP;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 20 "scanner.l"
-{printf("%d\n", ASSIGN);if(error_flag == 0) return ASSIGN;}
+{return ASSIGN;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 21 "scanner.l"
-{printf("%d\n", SEMICOLON); if(error_flag == 0) return SEMICOLON;}
+{return SEMICOLON;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 22 "scanner.l"
-{printf("%d\n", LBRACE);if(error_flag == 0) return LBRACE;}
+{return LBRACE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 23 "scanner.l"
-{printf("%d\n", RBRACE);if(error_flag == 0) return RBRACE;}
+{return RBRACE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 24 "scanner.l"
-{error_flag = 2;if(error_flag == 0) return yytext[0];}
+{return yytext[0];}
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
 #line 25 "scanner.l"
-{printf("NEWLINE\n"); return 0;}
+{return 0;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP

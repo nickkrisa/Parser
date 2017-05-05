@@ -6,13 +6,9 @@
 /* external variables */
 extern int yylex();
 extern FILE *yyin;
-extern FILE *yyout;
 void yyerror(const char *msg);
 
 /* global variables */
-FILE *infile;
-FILE *outfile;
-char line[256];
 int error_flag;
 %}
 
@@ -21,57 +17,81 @@ int error_flag;
 
 %start line
 %%
-
-line : statement;
-
-statement
-      : assignment
+line
+      :
+      | line assignment
+      | line expression
+      | line error
       ;
 
 assignment
-      : expression
-      | IDENTIFIER ASSIGN expression SEMICOLON {printf("asdfasdf");}
-      ;
+      : IDENTIFIER
+      | assignment ASSIGN expression SEMICOLON
 
 expression
-      : IDENTIFIER
-      | expression OP expression
-      | LBRACE expression RBRACE
+      : factor
+      | expression OP factor
       ;
 
+factor
+      : IDENTIFIER
+      | LBRACE expression RBRACE
+      ;
 %%
+
 void yyerror(const char *msg) {
   if (error_flag != 2)
     error_flag = 1;
 }
 
 int main() {
+  FILE *infile;
+  FILE *outfile;
+  char line[1000];
+
   // Redirect Output
-  yyout = fopen("out.txt", "w");
+  outfile = fopen("out.txt", "w");
   infile = fopen("in.txt", "r");
   yyin = fopen("in.txt", "r");
 
+  // Start
+  printf("Nicholas Krisa (cssc0869).\n");
+  printf("CS530. Guy Leonard. Spring 2017.\n");
+  printf("Assignment #3 - Parser.\n\n");
+  printf("Parsing...\n");
+
+  fprintf(outfile, "Nicholas Krisa (cssc0869).\n");
+  fprintf(outfile, "CS530. Guy Leonard. Spring 2017.\n");
+  fprintf(outfile, "Assignment #3 - Parser.\n\n");
+
+  // store next line for printing
   while (fgets(line, sizeof(line), infile) != NULL) {
+
+    // skip blank lines
+    if (line[0] == '\n')
+      continue;
+
+    // Parse the next line of yyin
     error_flag = 0;
     yyparse();
-    printf("%d\n", error_flag);
-    if (error_flag == 1) {
-      fprintf(yyout, "Failure| %s", line);
-      fprintf(yyout, "       ! syntax error.\n");
-    } else if (error_flag == 2) {
-        fprintf(yyout, "Failure| %s", line);
-        fprintf(yyout, "       ! unrecognized character.\n");
-    } else {
-      fprintf(yyout, "Success| %s", line);
-    }
-    printf(".....\n");
-  }
 
+    // Print Success or Failure to outfile
+    if (error_flag == 1) {
+      fprintf(outfile, "Failure| %s", line);
+      fprintf(outfile, "       ! syntax error.\n");
+    } else if (error_flag == 2) {
+        fprintf(outfile, "Failure| %s", line);
+        fprintf(outfile, "       ! unrecognized character.\n");
+    } else {
+      fprintf(outfile, "Success| %s", line);
+    }
+
+  } // end while
 
   // Finishing
   fclose(infile);
+  fclose(outfile);
   fclose(yyin);
-  fclose(yyout);
   printf("Complete.\n");
   return 0;
 }
