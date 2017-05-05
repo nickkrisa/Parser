@@ -1,0 +1,61 @@
+Nicholas Krisa (cssc0869)
+CS530. Guy Leonard. Spring 2017
+Assignment #3 - Parser
+README
+
+File Manifest:
+- parser.y
+The parser file is implemented using yacc.  Execution begins in the main function
+where FILE pointers are assigned to "in.txt" and "out.txt".  The parser then
+enters a while loop that gets a line from the in file.  The loop terminates once
+an EOF is found.  This string is stored for printing.  The parser then calls yyparse()
+invoking the following grammar.
+
+Grammar:
+<line>  ::=
+          | <line> <assignment>
+
+<assignmnet>  ::= <expression>
+                | IDENTIFIER ASSIGN <expression> SEMICOLON
+
+<expression>  ::= <factor>
+                | <expression> OPERATOR <factor>
+
+<factor>      ::= IDENTIFIER
+                | ( <expression> )
+
+If an error is discovered an flag is throw to know what to print.
+
+- scanner.l
+The scanner file is implemented using lex.  The lexical analyzer handles the following
+tokens:
+OP: + - / * %
+IDENTIFIER: [char or underscore][char or digit or underscore]
+LBRACE: (
+RBRACE: )
+SEMICOLON: ;
+ASSIGN: =
+
+- Makefile
+The Makefile used to create an executable.
+
+Compile Instructions:
+To compile and create an executable, simple use the Makefile.
+
+Operating Instructions:
+To operate simply execute the a3 executable using './a3'.
+
+Novel Design Decisions:
+I decided to make my parser operate a single line at a time.  This allowed me to
+print the input line after the result.
+
+Extra Features:
+This parser includes the extra feature of grouping using parenthesis.
+
+Deficiencies/Bugs:
+This program contains no bugs to my knowledge.
+
+Lessoned Learned:
+I learned a great deal from this program.  I had never used lex or yacc prior
+to completing this parser.  It definitely gave me a better understanding of
+lexical analysis, syntactic analysis and compliers.

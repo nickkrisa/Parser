@@ -1,3 +1,9 @@
+/* Nicholas Krisa (cssc0869)
+ * CS530. Guy Leonard. Spring 2017.
+ * Assignment #3 - Parser
+ * scanner.l
+ */
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +27,7 @@ op [+\-/*%]
 ";"                             {return SEMICOLON;}
 "("                             {return LBRACE;}
 ")"                             {return RBRACE;}
-.                               {return yytext[0];}
+.                               {error_flag = 2; return yytext[0];}
 [\n]*                           {return 0;}
 %%
 

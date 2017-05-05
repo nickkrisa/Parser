@@ -1,3 +1,8 @@
+# Nicholas Krisa (cssc0869)
+# CS530. Guy Leonard. Spring 2017.
+# Assignment 3 - Parser
+# Makefile
+
 CC = cc
 YACC = yacc -d
 LEX = lex

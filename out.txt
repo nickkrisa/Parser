@@ -4,7 +4,7 @@ Assignment #3 - Parser.
 
 Success| first = one1 + two2 - three3 / four4 ;
 Success| second = one1 * (two2 * three3) ;
-Success| one1 * (two2 * three3) 
+Success| one1 * (two2 * three3)
 Success| third = ONE + twenty - three3 ;
 Failure| third = old * thirty2 / b56
        ! syntax error.
@@ -13,13 +13,14 @@ Failure| first = = one1 + two2 - three3 / four4 ;
 Failure| first = one1 + two2 - three3 / four4
        ! syntax error.
 Failure| first = 1 + - two2 - three3 / four4 ;
-       ! syntax error.
+       ! unrecognized character.
 Failure| first = one1 + two2 ? three3 / four4 ;
-       ! syntax error.
+       ! unrecognized character.
+Success| second = one1 * (two2 * three3) ;
 Failure| second = 4 + ( one1 * two2 ) * ( three3 + four4 ;
-       ! syntax error.
+       ! unrecognized character.
 Failure| third = one1 + 24 - three3 ;
-       ! syntax error.
+       ! unrecognized character.
 Failure| one1 +- delta
        ! syntax error.
 Failure| sixty6 / min = fourth ;

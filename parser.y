@@ -1,3 +1,9 @@
+/* Nicholas Krisa (cssc0869)
+ * CS530. Guy Leonard. Spring 2017.
+ * Assignment #3 - Parser
+ * parser.y
+ */
+
 %{
 /* libraries */
 #include <stdio.h>
@@ -20,13 +26,13 @@ int error_flag;
 line
       :
       | line assignment
-      | line expression
       | line error
       ;
 
 assignment
-      : IDENTIFIER
-      | assignment ASSIGN expression SEMICOLON
+      : expression
+      | IDENTIFIER ASSIGN expression SEMICOLON
+      ;
 
 expression
       : factor
@@ -57,7 +63,8 @@ int main() {
   // Start
   printf("Nicholas Krisa (cssc0869).\n");
   printf("CS530. Guy Leonard. Spring 2017.\n");
-  printf("Assignment #3 - Parser.\n\n");
+  printf("Assignment #3 - Parser.\n");
+  printf("out.txt\n\n");
   printf("Parsing...\n");
 
   fprintf(outfile, "Nicholas Krisa (cssc0869).\n");
