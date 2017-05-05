@@ -1,3 +1,9 @@
+/* Nicholas Krisa (cssc0869)
+ * CS530. Guy Leonard. Spring 2017.
+ * Assignment #3 - Parser
+ * scanner.l
+ */
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,14 +21,14 @@ op [+\-/*%]
 %%  /* Token Definitions */
 [ \t]*                         ;
 
-{alphabetic}{alphanumeric}*     {printf("%d\n", IDENTIFIER);if(error_flag == 0) return IDENTIFIER;}
-{op}                            {printf("%d\n", OP);if(error_flag == 0) return OP;}
-"="                             {printf("%d\n", ASSIGN);if(error_flag == 0) return ASSIGN;}
-";"                             {printf("%d\n", SEMICOLON); if(error_flag == 0) return SEMICOLON;}
-"("                             {printf("%d\n", LBRACE);if(error_flag == 0) return LBRACE;}
-")"                             {printf("%d\n", RBRACE);if(error_flag == 0) return RBRACE;}
-.                               {error_flag = 2;if(error_flag == 0) return yytext[0];}
-[\n]*                           {printf("NEWLINE\n"); return 0;}
+{alphabetic}{alphanumeric}*     {return IDENTIFIER;}
+{op}                            {return OP;}
+"="                             {return ASSIGN;}
+";"                             {return SEMICOLON;}
+"("                             {return LBRACE;}
+")"                             {return RBRACE;}
+.                               {error_flag = 2; return yytext[0];}
+[\n]*                           {return 0;}
 %%
 
 int yywrap() {

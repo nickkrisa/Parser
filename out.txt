@@ -1,21 +1,27 @@
+Nicholas Krisa (cssc0869).
+CS530. Guy Leonard. Spring 2017.
+Assignment #3 - Parser.
+
 Success| first = one1 + two2 - three3 / four4 ;
 Success| second = one1 * (two2 * three3) ;
+Success| one1 * (two2 * three3)
 Success| third = ONE + twenty - three3 ;
-Success| third = old * thirty2 / b567 ;
-Success| one1 * i8766e98e + bignum
-Success| first = one1 + two2 - three3 / four4 ;
+Failure| third = old * thirty2 / b56
+       ! syntax error.
+Failure| first = = one1 + two2 - three3 / four4 ;
+       ! syntax error.
 Failure| first = one1 + two2 - three3 / four4
        ! syntax error.
 Failure| first = 1 + - two2 - three3 / four4 ;
        ! unrecognized character.
 Failure| first = one1 + two2 ? three3 / four4 ;
        ! unrecognized character.
+Success| second = one1 * (two2 * three3) ;
 Failure| second = 4 + ( one1 * two2 ) * ( three3 + four4 ;
        ! unrecognized character.
 Failure| third = one1 + 24 - three3 ;
        ! unrecognized character.
 Failure| one1 +- delta
        ! syntax error.
-Success| sixty6 / min = fourth ;
-Failure| one1 +- delta
+Failure| sixty6 / min = fourth ;
        ! syntax error.
