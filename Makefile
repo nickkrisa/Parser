@@ -15,4 +15,4 @@ lex.yy.c: scanner.l
 	$(LEX) scanner.l
 
 clean:
-	-rm -f *.o lex.yy.c *.tab.* a3 *.output
+	-rm -f *.o lex.yy.c *.tab.* a3 *.output out.txt
